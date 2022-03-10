@@ -11,8 +11,15 @@
 
   <body>
     <p>
-      <a href="/sessions/new">Login</a>
-      <a href="/users/new">Sign Up</a>
+      <!-- if logged in -->
+      <% if @current_user %>
+        Logged in as: <%= @current_user.first_name%>
+        <%= button_to "Logout", "/sessions/logout", method: :delete %></p>
+      <% else %>
+        <a href="/sessions/new">Login</a>
+        |
+        <a href="/users/new">Sign Up</a>
+      <% end %>
     </p>
 
     <p>
