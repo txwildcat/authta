@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    @tasks = Task..where({ user_id: @current_user.id }) 
     @task = Task.new
   end
 
   def create
     @task = Task.new(params["task"])
+    @task.user_id = @current_user.id #this line makes it so that everything that is logged in the table has a user id associated with it
     @task.save
     redirect_to "/tasks"
   end
